@@ -8,11 +8,28 @@ Introduction
 This tool tries to facilitate the creation of high-class and comprehensive documentations for RESTful APIs. Therefore it provides a simple XML schema for describing the API, its resources and operations. Different 
 
 
+Usage
+-----------
+This tool provides an Ant build file for executing transformations. The following targets are available so far
+- plain
+- xhtml
+- pdf
+- all
+
+The following command generates a PDF version from the XML file expected in the directory foo named foo.xml
+
+> ant pdf -Dapi=foo
+
+If successful, the PDF file can be found in output/foo/foo.pdf
+
+You can also set the $api variable in the build-file and omit the parameter.
+
+
 Stylesheets
 -----------
-- XHTML (planned)
+- XHTML (wip)
+- text/plain (wip)
 - LaTeX (planned)
-- text/plain (planned)
 
 
 FAQ
