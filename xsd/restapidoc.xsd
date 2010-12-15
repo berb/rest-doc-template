@@ -67,7 +67,7 @@
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
-			<xsd:element name="entities" type="entityType" minOccurs="0"/>
+			<xsd:element name="entities" type="entityType"/>
 
 		</xsd:sequence>
 	</xsd:complexType>
@@ -75,7 +75,7 @@
 	<xsd:complexType name="responseType">
 		<xsd:sequence>
 			<xsd:element name="responses" type="answerType" />
-			<xsd:element name="entities" type="entityType" minOccurs="0"/>
+			<xsd:element name="entities" type="entityType" />
 		</xsd:sequence>
 	</xsd:complexType>
 

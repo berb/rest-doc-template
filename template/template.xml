@@ -53,7 +53,7 @@ volutpat. 	</description>
 						<type>OAuth</type>
 					</authentication>
 
-					
+					<entities></entities>
 
 				</request>
 
@@ -69,8 +69,7 @@ volutpat. 	</description>
 	"mediatype":"text",
 	"owner":"foo",
 	"uploaded":"2010-07-17T18:54:11.939Z"
-}
-						</code>
+}</code>
 
 					</entity>
 					</entities>
@@ -106,8 +105,8 @@ volutpat. 	</description>
 	"mediatype":"text",
 	"owner":"foo",
 	"uploaded":"2010-07-17T18:54:11.939Z"
-}
-						</code>
+}</code>
+<description>foo bar</description>
 
 					</entity>
 					</entities>					
@@ -120,17 +119,18 @@ volutpat. 	</description>
 					</responses>
 					<entities>
 					<entity>
-						<code language="js">
-{
+						
+<code language="js">
+<![CDATA[{
 	"id":"d16e103e-4fda-433d-9309-179487ecad4a",
 	"mediatype":"text",
 	"owner":"foo",
 	"uploaded":"2010-07-17T18:54:11.939Z"
-}
-						</code>
+}]]>
+</code>
 
 					</entity>					<entity>
-						<code language="text">
+						<code language="plain">
 das ist ein test
 						</code>
 
