@@ -10,17 +10,18 @@ This tool tries to facilitate the creation of high-class and comprehensive docum
 
 Usage
 -----------
-This tool provides an Ant build file for executing transformations. The following targets are available so far
+This tool provides an Ant build file for executing transformations. The following targets are available so far:
+
 - plain
 - xhtml
 - pdf
 - all
 
-The following command generates a PDF version from the XML file expected in the directory foo named foo.xml
+The following command generates a PDF version from the XML file expected in the directory foo named bla.xml
 
-> ant pdf -Dapi=foo
+> ant pdf -Dapidir=foo -Dapiname=bla
 
-If successful, the PDF file can be found in output/foo/foo.pdf
+If successful, the PDF file can be found in output/foo/bla.pdf
 
 You can also set the $api variable in the build-file and omit the parameter.
 

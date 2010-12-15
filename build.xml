@@ -3,10 +3,11 @@
         Buildfile for XSL(T) batch transformations.
     </description>
 
-	<property name="api" value="template" />
+	<property name="apidir" value="template" />
+	<property name="apiname" value="template" />
 
 	<property name="output" location="output" />
-	<property name="source" location="${api}" />
+	<property name="source" location="${apidir}" />
 	<property name="lib" location="lib" />
 	<property name="tmp" location="tmp" />
 
@@ -18,25 +19,36 @@
 	</target>
 
 	<target name="plain" depends="init">
-		<xslt in="${source}/${api}.xml" out="${output}/${api}/${api}.txt" style="xsl/text.xsl" />
+		<xslt in="${source}/${apiname}.xml" out="${output}/${apidir}/${apiname}.txt" style="xsl/text.xsl">
+			<outputproperty name="omit-xml-declaration" value="yes" />
+			<outputproperty name="method" value="text" />
+			<outputproperty name="indent" value="no" />
+			<outputproperty name="media-type" value="text/plain" />
+		</xslt>
 	</target>
 
 	<target name="xhtml" depends="init">
-		<xslt in="${source}/${api}.xml" out="${output}/${api}/${api}.html" style="xsl/xhtml.xsl" />
+		<xslt in="${source}/${apiname}.xml" out="${output}/${apidir}/${apiname}.html" style="xsl/xhtml.xsl">
+		</xslt>
 	</target>
 
 	<target name="tex" depends="init">
-		<xslt in="${source}/${api}.xml" out="${tmp}/${api}.tex" style="xsl/latex.xsl" />
+		<xslt in="${source}/${apiname}.xml" out="${tmp}/${apiname}.tex" style="xsl/latex.xsl">
+			<outputproperty name="omit-xml-declaration" value="yes" />
+			<outputproperty name="method" value="text" />
+			<outputproperty name="indent" value="no" />
+			<outputproperty name="media-type" value="application/x-tex" />
+		</xslt>
 	</target>
 
 	<target name="pdf" depends="tex">
 		<exec dir="${tmp}" executable="pdflatex">
-			<arg value="${tmp}/${api}.tex" />
+			<arg value="${tmp}/${apiname}.tex" />
 		</exec>
 		<exec dir="${tmp}" executable="pdflatex">
-			<arg value="/${tmp}/${api}.tex" />
+			<arg value="/${tmp}/${apiname}.tex" />
 		</exec>
-		<copyfile src="${tmp}/${api}.pdf" dest="${output}/${api}/${api}.pdf" />
+		<copy file="${tmp}/${apiname}.pdf" tofile="${output}/${apidir}/${apiname}.pdf" />
 	</target>
 
 
