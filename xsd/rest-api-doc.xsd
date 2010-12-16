@@ -1,0 +1,250 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.ioexception.de/rest-api-doc"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ioexception.de/rest-api-doc"
+	elementFormDefault="qualified">
+	<xsd:element name="api">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="name" type="xsd:string" />
+				<xsd:element name="version" type="xsd:string" />
+				<xsd:element name="author" type="xsd:string" />
+				<xsd:element name="description" type="descriptionType" />
+				<xsd:element name="baseuri" type="xsd:anyURI" />
+				<xsd:element name="authentication">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="type" type="authType" minOccurs="0"
+								maxOccurs="unbounded" />
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="resources" type="resourcesListType" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+
+	<xsd:complexType name="resourcesListType">
+		<xsd:sequence>
+			<xsd:element name="resource" type="resourceType"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="resourceType">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string" />
+			<xsd:element name="description" type="xsd:string" />
+			<xsd:element name="path" type="uriPartType" minOccurs="0" />
+			<xsd:sequence>
+				<xsd:element name="operation" type="operationType"
+					minOccurs="0" maxOccurs="unbounded" />
+
+			</xsd:sequence>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="operationType">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string" />
+			<xsd:element name="description" type="descriptionType" />
+			<xsd:element name="path" type="uriPartType" minOccurs="0" />
+			<xsd:element name="formats">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="format" type="contentType"
+							maxOccurs="unbounded" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="request" type="requestType" />
+			<xsd:element name="response" type="responseType" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="requestType">
+		<xsd:sequence>
+			<xsd:element name="method" type="httpmethodType" />
+			<xsd:element name="authentication">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="mandatory" type="xsd:boolean" />
+						<xsd:element name="note" type="xsd:string" minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="entities" type="entityType" />
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="responseType">
+		<xsd:sequence>
+			<xsd:element name="responses" type="answerType" />
+			<xsd:element name="entities" type="entityType" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="entityType">
+		<xsd:sequence maxOccurs="unbounded">
+			<xsd:element name="entity" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="code" type="codeType" minOccurs="0" />
+						<xsd:element name="description" type="xsd:string"
+							minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="returnsType">
+		<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+			<xsd:element name="return">
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="xsd:string">
+							<xsd:attribute name="language" type="xsd:string" />
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="httpstatuscodeType">
+		<xsd:restriction base="xsd:positiveInteger">
+			<xsd:enumeration value="100" />
+			<xsd:enumeration value="101" />
+			<xsd:enumeration value="200" />
+			<xsd:enumeration value="201" />
+			<xsd:enumeration value="202" />
+			<xsd:enumeration value="203" />
+			<xsd:enumeration value="204" />
+			<xsd:enumeration value="205" />
+			<xsd:enumeration value="206" />
+			<xsd:enumeration value="300" />
+			<xsd:enumeration value="301" />
+			<xsd:enumeration value="302" />
+			<xsd:enumeration value="303" />
+			<xsd:enumeration value="304" />
+			<xsd:enumeration value="305" />
+			<xsd:enumeration value="306" />
+			<xsd:enumeration value="307" />
+			<xsd:enumeration value="400" />
+			<xsd:enumeration value="401" />
+			<xsd:enumeration value="402" />
+			<xsd:enumeration value="403" />
+			<xsd:enumeration value="404" />
+			<xsd:enumeration value="405" />
+			<xsd:enumeration value="406" />
+			<xsd:enumeration value="407" />
+			<xsd:enumeration value="408" />
+			<xsd:enumeration value="409" />
+			<xsd:enumeration value="410" />
+			<xsd:enumeration value="411" />
+			<xsd:enumeration value="412" />
+			<xsd:enumeration value="413" />
+			<xsd:enumeration value="414" />
+			<xsd:enumeration value="415" />
+			<xsd:enumeration value="416" />
+			<xsd:enumeration value="417" />
+			<xsd:enumeration value="500" />
+			<xsd:enumeration value="501" />
+			<xsd:enumeration value="502" />
+			<xsd:enumeration value="503" />
+			<xsd:enumeration value="504" />
+			<xsd:enumeration value="505" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+	<xsd:simpleType name="httpmethodType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="HEAD" />
+			<xsd:enumeration value="GET" />
+			<xsd:enumeration value="POST" />
+			<xsd:enumeration value="PUT" />
+			<xsd:enumeration value="DELETE" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+	<xsd:simpleType name="authType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Basic Authentication" />
+			<xsd:enumeration value="Digest Authentication" />
+			<xsd:enumeration value="OAuth" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+	<xsd:simpleType name="contentType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="application/json" />
+			<xsd:enumeration value="text/xml" />
+			<xsd:enumeration value="text/plain" />
+			<xsd:enumeration value="n/a" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="languageType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="js" />
+			<xsd:enumeration value="xml" />
+			<xsd:enumeration value="plain" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="codeType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute use="required" name="language" type="languageType" />
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="answerType">
+		<xsd:sequence maxOccurs="unbounded">
+			<xsd:element name="answer">
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="xsd:string">
+							<xsd:attribute use="required" name="code"
+								type="httpstatuscodeType" />
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="uriPartType" mixed="true">
+		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="param">
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="xsd:string">
+							<xsd:attribute use="required" name="description"
+								type="xsd:string" />
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="descriptionType" mixed="true">
+		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="b" type="xsd:string" minOccurs="0" />
+			<xsd:element name="it" type="xsd:string" minOccurs="0" />
+			<xsd:element name="tt" type="xsd:string" minOccurs="0" />
+			<xsd:element name="code" type="codeType" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

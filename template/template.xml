@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <api xmlns="http://www.ioexception.de/rest-api-doc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.ioexception.de/rest-api-doc ../xsd/restapidoc.xsd ">
+	xsi:schemaLocation="http://www.ioexception.de/rest-api-doc ../xsd/rest-api-doc.xsd ">
 
 	<name>Example Application API</name>
 	<version>v1</version>
@@ -13,13 +13,21 @@ dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
 sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
 consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
 labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
-et accusam et justo duo dolores et ea rebum. Stet clita kasd
-gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+et accusam et justo duo <b>dolores</b> et ea rebum. Stet clita kasd
+gubergren, no sea takimata <it>sanctus</it> est Lorem ipsum dolor sit amet.
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+nonumy eirmod tempor <tt>invidunt</tt> ut labore et dolore magna aliquyam erat,
 sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
 rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
 ipsum dolor sit amet.
+
+						<code language="js">
+{
+	"id":"d16e103e-4fda-433d-9309-179487ecad4a",
+	"mediatype":"text",
+	"owner":"foo",
+	"uploaded":"2010-07-17T18:54:11.939Z"
+}</code>
 
 Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
 molestie consequat, vel illum dolore eu feugiat nulla facilisis at
@@ -29,12 +37,23 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
 nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
 volutpat. 	</description>
 	<baseuri>http://apiserver/v1</baseuri>
+	<authentication><type>Basic Authentication</type>
+	<type>OAuth</type></authentication>
 	<resources>
 
 
 		<resource>
 			<name>User</name>
-			<description>represents a user object</description>
+			<description>represents a user object asdasd
+			as
+									<code language="js">
+{
+	"id":"d16e103e-4fda-433d-9309-179487ecad4a",
+	"mediatype":"text",
+	"owner":"foo",
+	"uploaded":"2010-07-17T18:54:11.939Z"
+}</code>
+asdasd</description>
 			<path>/user/</path>
 			<operation>
 				<name>get user data</name>
@@ -48,9 +67,7 @@ volutpat. 	</description>
 				<request>
 					<method>GET</method>
 					<authentication>
-						<mandatory>true</mandatory>
-						<type>Basic Authentication</type>
-						<type>OAuth</type>
+					<mandatory>false</mandatory>
 					</authentication>
 
 					<entities></entities>
@@ -95,7 +112,6 @@ volutpat. 	</description>
 					<method>GET</method>
 					<authentication>
 						<mandatory>false</mandatory>
-						<type>Basic Authentication</type>
 					</authentication>
 					<entities>
 					<entity>

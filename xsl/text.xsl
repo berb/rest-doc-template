@@ -25,9 +25,10 @@
                 <xsl:with-param name="char" select="'='" />
         </xsl:call-template>&cr;
         		
-		<xsl:text>Author:&tab;&tab;</xsl:text><xsl:apply-templates select="api:author" />&cr;
-		<xsl:text>Version:&tab;</xsl:text><xsl:apply-templates select="api:version" />&cr;
-		<xsl:text>Base URI:&tab;</xsl:text><xsl:apply-templates select="api:baseuri" />&cr;&cr;&cr;
+		<xsl:text>Author:</xsl:text>&tab;&tab;<xsl:apply-templates select="api:author" />&cr;
+		<xsl:text>Version:</xsl:text>&tab;<xsl:apply-templates select="api:version" />&cr;
+		<xsl:text>Base URI:</xsl:text>&tab;<xsl:apply-templates select="api:baseuri" />&cr;
+		<xsl:text>Auth:</xsl:text>&tab;&tab;<xsl:apply-templates select="api:authentication" />&cr;&cr;&cr;
 
         <xsl:call-template name="heading">
                 <xsl:with-param name="string">Description</xsl:with-param> 
@@ -172,11 +173,7 @@
 		<xsl:text>Auth:&tab;&tab;&tab;</xsl:text>
 		<xsl:choose>
 			<xsl:when test="api:authentication/api:mandatory = 'true'">
-				<xsl:text>required (</xsl:text>
-				<xsl:for-each select="api:authentication/api:type">
-					<xsl:value-of select="." /><xsl:text>; </xsl:text>
-				</xsl:for-each>
-				<xsl:text>)</xsl:text>
+				<xsl:text>required</xsl:text>
 			</xsl:when>
 			<xsl:otherwise>not required</xsl:otherwise>
 		</xsl:choose>&cr;
@@ -209,10 +206,7 @@
 		<xsl:if test="count(api:entities/api:entity) > 0">
 		<xsl:text>Entities:&cr;</xsl:text>
 			<xsl:for-each select="api:entities/api:entity">
-				<xsl:text>Format: </xsl:text><xsl:value-of select="api:code/@language" />&cr;
-				<xsl:text>+----------------------------------------------------------------+</xsl:text>
-				<xsl:value-of select="api:code" />&cr;
-				<xsl:text>+----------------------------------------------------------------+</xsl:text>&cr;&cr;
+				<xsl:apply-templates select="api:code" />&cr;
 			</xsl:for-each>
 		</xsl:if>
 		
@@ -248,8 +242,10 @@
 	</xsl:template>
 
 	<xsl:template match="api:code">
-		<xsl:text>Language: <xsl:value-of select="@language" /></xsl:text>
-		<xsl:apply-templates />
+		<xsl:text>Language: <xsl:value-of select="@language" /></xsl:text>&cr;
+		<xsl:text>+----------------------------------------------------------------+</xsl:text>		
+		<xsl:apply-templates />&cr;
+		<xsl:text>+----------------------------------------------------------------+</xsl:text>&cr;
 	</xsl:template>
 
 	<xsl:template match="api:formats">
@@ -265,6 +261,18 @@
 	</xsl:template>
 	
 	<xsl:template match="api:param">
+		<xsl:apply-templates />
+	</xsl:template>
+	
+	<xsl:template match="api:b">
+		<xsl:apply-templates />
+	</xsl:template>
+	
+	<xsl:template match="api:it">
+		<xsl:apply-templates />
+	</xsl:template>
+	
+	<xsl:template match="api:tt">
 		<xsl:apply-templates />
 	</xsl:template>
 
@@ -347,5 +355,12 @@
 	
 	</xsl:template>
 	
+	
+		<xsl:template match="api:api/api:authentication">
+				<xsl:value-of select="api:type" />
+				<xsl:for-each select="api:type[position() > 1]">
+					<xsl:text>, </xsl:text><xsl:value-of select="." />
+				</xsl:for-each>
+	</xsl:template>
 	
 </xsl:stylesheet>

@@ -126,6 +126,13 @@ moredelim=[is][\textbf]{|}{|}
 %\setcounter{tocdepth}{1}
 \tableofcontents
 
+\section*{Introduction}
+	Supported authentication schemes:
+		<xsl:apply-templates select="api:authentication" />
+	Base URI:
+		<xsl:value-of select="$baseURI" />
+
+
 		
 		<xsl:apply-templates select="api:resources" />
 		
@@ -219,15 +226,19 @@ moredelim=[is][\textbf]{|}{|}
 				
 	</xsl:template>
 
-	<xsl:template match="api:authentication">
-		<xsl:choose>
-			<xsl:when test="api:mandatory = 'true'">
-				<xsl:text>required</xsl:text>
+
+	<xsl:template match="api:api/api:authentication">
 				\begin{itemize}
 				<xsl:for-each select="api:type">
 					\item <xsl:value-of select="." />
 				</xsl:for-each>
 				\end{itemize}
+	</xsl:template>
+
+	<xsl:template match="api:request/api:authentication">
+		<xsl:choose>
+			<xsl:when test="api:mandatory = 'true'">
+				<xsl:text>required</xsl:text>
 			</xsl:when>
 			<xsl:otherwise>not required</xsl:otherwise>
 		</xsl:choose>
@@ -320,10 +331,19 @@ moredelim=[is][\textbf]{|}{|}
 			<xsl:when test="$code = '505'">HTTP Version Not Supported</xsl:when>
 			<xsl:otherwise>custom</xsl:otherwise>
 		</xsl:choose>
-
-
 		<xsl:text>}</xsl:text>
+	</xsl:template>
 	
+		<xsl:template match="api:b">
+		\textbf{<xsl:apply-templates />}
+	</xsl:template>
+	
+	<xsl:template match="api:it">
+		\textit{<xsl:apply-templates />}
+	</xsl:template>	
+	
+	<xsl:template match="api:tt">
+		\texttt{<xsl:apply-templates />}
 	</xsl:template>
 
 </xsl:stylesheet>
