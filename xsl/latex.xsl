@@ -162,6 +162,17 @@ moredelim=[is][\textbf]{|}{|}
 							<xsl:otherwise><xsl:value-of select="." /></xsl:otherwise>
 						</xsl:choose>
    			        </xsl:for-each>}
+
+		\begin{tabular}{|l|l|}\hline
+		<xsl:for-each select="api:path/node()">
+							<xsl:if test="@description">
+								<xsl:text>\textbf{</xsl:text>
+									<xsl:value-of select="." />
+								<xsl:text>} &amp; </xsl:text>
+									<xsl:value-of select="@description" /> \\
+									\hline
+							</xsl:if>
+   			        </xsl:for-each>\end{tabular}     			        
    			        
 		<xsl:apply-templates select="api:operation" />
 		\newpage
@@ -285,7 +296,6 @@ moredelim=[is][\textbf]{|}{|}
 
 	<xsl:template name="statuscode">
 		<xsl:param name="code" />
-		
 		<xsl:text>\texttt{</xsl:text><xsl:value-of select="$code" /><xsl:text> </xsl:text>
 		<xsl:choose>
 			<xsl:when test="$code = '100'">Continue</xsl:when>
