@@ -108,7 +108,11 @@
 			        </xsl:call-template>
  			        <xsl:apply-templates select="api:description" />&cr;&cr;
 
-   			        <xsl:text>URI:&tab;&tab;&tab;</xsl:text><xsl:value-of select="$resoureUri" />
+   			        <xsl:text>URI:&tab;&tab;&tab;</xsl:text>
+					<xsl:choose>
+						<xsl:when test="api:path[@omitResourcePath = 'true']"><xsl:value-of select="$baseURI" /></xsl:when>
+				       <xsl:otherwise><xsl:value-of select="$resoureUri" /></xsl:otherwise>
+			        </xsl:choose>   			        
    			        <xsl:for-each select="api:path/node()">
 	   			       <xsl:choose>
 							<xsl:when test="@description">

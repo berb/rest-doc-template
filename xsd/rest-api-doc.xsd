@@ -49,7 +49,15 @@
 		<xsd:sequence>
 			<xsd:element name="name" type="xsd:string" />
 			<xsd:element name="description" type="descriptionType" />
-			<xsd:element name="path" type="uriPartType" minOccurs="0" />
+			<xsd:element name="path" minOccurs="0" >
+				<xsd:complexType >
+					<xsd:complexContent>
+						<xsd:extension base="uriPartType">
+						<xsd:attribute use="optional" name="omitResourcePath" type="xsd:boolean" default="false"/>
+						</xsd:extension>						
+					</xsd:complexContent> 
+				</xsd:complexType>
+			</xsd:element>
 			<xsd:element name="formats">
 				<xsd:complexType>
 					<xsd:sequence>

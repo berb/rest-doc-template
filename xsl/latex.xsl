@@ -199,7 +199,11 @@ moredelim=[is][\textbf]{|}{|}
 						</xsl:choose>
    			        </xsl:for-each>
 			        </xsl:variable>
-			\texttt{<xsl:value-of select="$resoureUri" />		
+			\texttt{
+			<xsl:choose>
+					<xsl:when test="api:path[@omitResourcePath = 'true']"><xsl:value-of select="$baseURI" /></xsl:when>
+			       <xsl:otherwise><xsl:value-of select="$resoureUri" /></xsl:otherwise>
+		        </xsl:choose>
 			           <xsl:for-each select="api:path/node()">
 	   			       <xsl:choose>
 							<xsl:when test="@description">

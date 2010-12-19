@@ -27,7 +27,7 @@
 body {
 	background: #FFF;
 	color: #333;
-	font: normal 75% sans-serif;
+	font: normal 100% sans-serif;
 margin-left: auto;
 	margin-right: auto;
 
@@ -43,7 +43,6 @@ margin-left: auto;
 }
 
 
-
 h1,h2,h3,h4,h5,h6 {
 	color: #444;
 	font-weight: normal;
@@ -55,25 +54,24 @@ h1,h2,h3,h4,h5,h6 {
 h4,h5,h6 {font-weight: bold;}
 
 h1 {font-size: 2.6em;}
-h2 {font-size: 2em;}
-h3 {font-size: 1.5em;}
+h2 {font-size: 2em;margin-top:3em;}
+h3 {font-size: 1.5em;margin-top:1.5em;}
 h4 {font-size: 1.25em;}
 h5 {font-size: 1.1em;}
 h6 {font-size: 1em;}
 
 h1 img, h2 img, h3 img, h4 img, h5 img, h6 img {margin: 0;}
 
-.statuscodes dt {
-	font: bold 133% monospace; 
-}
-
 pre {
-	font: normal 133% monospace; 
+	font: normal 100% monospace; 
 }
 
 
+dl { padding: 0.5em; } dt { background:#fff; float: left; clear: left; padding-left:0.3em; padding-right:0.3em;  text-align: right; }  dd { margin: 0 0 0 110px; padding: 0 0 0.5em 0; }
 
-dl { padding: 0.5em; } dt { background:#fff; float: left; clear: left; padding-left:0.3em; padding-right:0.3em;  text-align: right; } dt:after { content: ":"; } dd { margin: 0 0 0 110px; padding: 0 0 0.5em 0; }
+.statuscode, .method {
+	font: bold 100% monospace; 
+}
 
 			</style>
 
@@ -138,7 +136,7 @@ dl { padding: 0.5em; } dt { background:#fff; float: left; clear: left; padding-l
 		<xsl:element name="a">
 			<xsl:attribute name="name"><xsl:value-of select="generate-id(.)" /></xsl:attribute>
 		</xsl:element>
-		<h2><xsl:value-of select="position()" />. <xsl:apply-templates select="api:name" /></h2>
+		<h2 class="resource"><xsl:value-of select="position()" />. <xsl:apply-templates select="api:name" /></h2>
 		<xsl:variable name="resourceNr"><xsl:value-of select="position()" /></xsl:variable>
 		
 		<h4>Description</h4>
@@ -171,7 +169,7 @@ dl { padding: 0.5em; } dt { background:#fff; float: left; clear: left; padding-l
 		<xsl:element name="a">
 			<xsl:attribute name="name"><xsl:value-of select="generate-id(.)" /></xsl:attribute>
 		</xsl:element>		
-		<h3><xsl:value-of select="$resourceNr" />.<xsl:value-of select="position()" /><xsl:text> </xsl:text><xsl:apply-templates select="api:name" /></h3>
+		<h3  class="operation"><xsl:value-of select="$resourceNr" />.<xsl:value-of select="position()" /><xsl:text> </xsl:text><xsl:apply-templates select="api:name" /></h3>
 		
 		<h4>Description</h4>
 		<xsl:apply-templates select="api:description" />
@@ -188,7 +186,12 @@ dl { padding: 0.5em; } dt { background:#fff; float: left; clear: left; padding-l
 						</xsl:choose>
    			        </xsl:for-each>
 			        </xsl:variable>
-						<xsl:value-of select="$resoureUri" />		
+			<pre>			
+				<xsl:choose>
+					<xsl:when test="api:path[@omitResourcePath = 'true']"><xsl:value-of select="$baseURI" /></xsl:when>
+			       <xsl:otherwise><xsl:value-of select="$resoureUri" /></xsl:otherwise>
+		        </xsl:choose>					
+								
 			           <xsl:for-each select="api:path/node()">
 	   			       <xsl:choose>
 							<xsl:when test="@description">
@@ -196,11 +199,13 @@ dl { padding: 0.5em; } dt { background:#fff; float: left; clear: left; padding-l
 							</xsl:when>
 							<xsl:otherwise><xsl:value-of select="." /></xsl:otherwise>
 						</xsl:choose>
-   			        </xsl:for-each>
+   			        </xsl:for-each></pre>
 
 		
 		<h4>URI Parameters</h4>
-  			        
+			<xsl:choose>
+				<xsl:when test="count(api:path/api:param) > 0">
+			  			        
    			        <dl>
    			        <xsl:for-each select="api:path/node()">
 							<xsl:if test="@description">
@@ -208,7 +213,10 @@ dl { padding: 0.5em; } dt { background:#fff; float: left; clear: left; padding-l
 								<dd><xsl:value-of select="@description" /></dd>									
 							</xsl:if>
    			        </xsl:for-each>
-   			        </dl>		
+   			        </dl>
+		       </xsl:when>
+		       <xsl:otherwise>n/a</xsl:otherwise>
+	        </xsl:choose>		
 		<h4>HTTP Method</h4>
 		<xsl:apply-templates select="api:request/api:method" />
 		
@@ -245,6 +253,10 @@ dl { padding: 0.5em; } dt { background:#fff; float: left; clear: left; padding-l
 
 	<xsl:template match="api:entity">
 		<xsl:apply-templates />
+	</xsl:template>			
+			
+	<xsl:template match="api:method">
+		<span class="method"><xsl:apply-templates /></span>
 	</xsl:template>			
 			
 	<xsl:template match="api:name">
