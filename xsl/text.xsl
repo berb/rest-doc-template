@@ -176,7 +176,7 @@
 		<xsl:text>Method:&tab;&tab;&tab;</xsl:text><xsl:apply-templates select="api:method" />&cr;
 		<xsl:text>Auth:&tab;&tab;&tab;</xsl:text>
 		<xsl:choose>
-			<xsl:when test="api:authentication/api:mandatory = 'true'">
+			<xsl:when test="api:authentication[@mandatory = 'true']">
 				<xsl:text>required</xsl:text>
 			</xsl:when>
 			<xsl:otherwise>not required</xsl:otherwise>

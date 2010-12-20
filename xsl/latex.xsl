@@ -252,7 +252,7 @@ moredelim=[is][\textbf]{|}{|}
 
 	<xsl:template match="api:request/api:authentication">
 		<xsl:choose>
-			<xsl:when test="api:mandatory = 'true'">
+			<xsl:when test="@mandatory = 'true'">
 				<xsl:text>required</xsl:text>
 			</xsl:when>
 			<xsl:otherwise>not required</xsl:otherwise>

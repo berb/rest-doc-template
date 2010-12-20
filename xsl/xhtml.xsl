@@ -303,7 +303,7 @@ dl { padding: 0.5em; } dt { background:#fff; float: left; clear: left; padding-l
 
 	<xsl:template match="api:request/api:authentication">
 		<xsl:choose>
-			<xsl:when test="api:mandatory = 'true'">
+			<xsl:when test="@mandatory = 'true'">
 				<xsl:text>required</xsl:text>
 			</xsl:when>
 			<xsl:otherwise>not required</xsl:otherwise>
