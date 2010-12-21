@@ -1,0 +1,113 @@
+API DOCUMENTATION: Foo Bar Example API
+======================================
+
+Author:		John Doe
+Version:	v2
+Base URI:	http://myapipath/v2
+Auth:		Basic Authentication, OAuth
+
+
+Description
+###########
+
+The following document describe the RESTful API of the
+		example service foo bar. 
+
+
+Overview
+########
+
+1 User
+	1.1 Create a new user account
+	1.2 Get user details
+
+
+
+1. User
+#######
+URI:			http://myapipath/v2/user/{user-id}
+URI Params:
+			{user-id}: user ID
+
+This resource represents a user. 
+
+
+1.1 Create a new user account
+=============================
+Creates a new user account, if user registration is enabled.
+
+URI:			http://myapipath/v2/users
+URI Params:
+
+Formats:		application/json 
+
+REQUEST
+-------
+
+Method:			POST
+Auth:			not required
+
+Entities:
+
+Format: js
++----------------------------------------------------------------+
+{
+	 "email" : "john@doe.net",
+	 "username" : "John Doe"
+}
++----------------------------------------------------------------+
+
+
+RESPONSE
+--------
+
+Answers:
+			201 ("Created"):  User account has been created. The location header contains its URI.
+			400 ("Bad Request"):  The provided data are incomplete or invalid.
+			403 ("Forbidden"):  The service instance does not allow the creation of new user accounts.
+			409 ("Conflict"):  The user account has not been created, because there already exists an account with matching parameters.
+
+
+
+1.2 Get user details
+====================
+Returns information about a registered user.
+
+URI:			http://myapipath/v2/user/{user-id}
+URI Params:
+
+Formats:		application/json 
+
+REQUEST
+-------
+
+Method:			GET
+Auth:			required
+
+RESPONSE
+--------
+
+Answers:
+			200 ("OK"):  The data set is returned as the response entity.
+			404 ("Not Found"):  There is no user with this user ID.
+
+Entities:
+The data returned when queried by another user.
+Language: js
++----------------------------------------------------------------+
+{
+	 "username" : "John Doe"
+}
++----------------------------------------------------------------+
+
+The data returned when queried by the user himself.
+Language: js
++----------------------------------------------------------------+
+{
+	 "email" : "john@doe.net",
+	 "username" : "John Doe"
+}
++----------------------------------------------------------------+
+
+
+

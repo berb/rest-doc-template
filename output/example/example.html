@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns:api="http://www.ioexception.de/rest-api-doc" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="http://alexgorbatchev.com/pub/sh/current/styles/shCore.css" rel="stylesheet" type="text/css">
+<link href="http://alexgorbatchev.com/pub/sh/current/styles/shThemeRDark.css" rel="stylesheet" type="text/css">
+<script src="http://alexgorbatchev.com/pub/sh/current/scripts/shCore.js" type="text/javascript"></script><script src="http://alexgorbatchev.com/pub/sh/current/scripts/shBrushJScript.js" type="text/javascript"></script><script src="http://alexgorbatchev.com/pub/sh/current/scripts/shBrushXml.js" type="text/javascript"></script><script src="http://alexgorbatchev.com/pub/sh/current/scripts/shBrushPlain.js" type="text/javascript"></script>
+<style type="text/css">
+			
+body {
+	background: #FFF;
+	color: #333;
+	font: normal 100% sans-serif;
+margin-left: auto;
+	margin-right: auto;
+
+	line-height: 1.5;
+	width:66%;
+}
+
+
+.uripart {
+	background:#666;
+	color: #fff;
+	font-style: italic;
+}
+
+
+h1,h2,h3,h4,h5,h6 {
+	color: #444;
+	font-weight: normal;
+	line-height: 1;
+	margin-bottom: 0.6em;
+	font-family:  Helvetica, sans-serif;
+
+}
+h4,h5,h6 {font-weight: bold;}
+
+h1 {font-size: 2.6em;}
+h2 {font-size: 2em;margin-top:3em;}
+h3 {font-size: 1.5em;margin-top:1.5em;}
+h4 {font-size: 1.25em;}
+h5 {font-size: 1.1em;}
+h6 {font-size: 1em;}
+
+h1 img, h2 img, h3 img, h4 img, h5 img, h6 img {margin: 0;}
+
+pre {
+	font: normal 100% monospace; 
+}
+
+
+dl { padding: 0.5em; } dt { background:#fff; float: left; clear: left; padding-left:0.3em; padding-right:0.3em;  text-align: right; }  dd { margin: 0 0 0 110px; padding: 0 0 0.5em 0; }
+
+.statuscode, .method {
+	font: bold 100% monospace; 
+}
+
+			</style>
+<script type="text/javascript">
+		SyntaxHighlighter.all();
+</script>
+<title>Foo Bar Example API - RESTful API Documentation</title>
+</head>
+<body>
+<h1>Foo Bar Example API</h1>
+<a name="introduction"></a>
+<h2>Introduction</h2>
+<h4>Version</h4>
+<p>v2</p>
+<h4>Author</h4>
+<p>John Doe</p>
+<h4>Description</h4>
+<p>The following document describe the RESTful API of the
+		example service foo bar. </p>
+<h4>Authentication Schemes</h4>
+<p>
+<ul>
+<li>Basic Authentication</li>
+<li>OAuth</li>
+</ul>
+</p>
+<h4>Base URI</h4>
+<p>
+<a xmlns="" href="http://myapipath/v2">http://myapipath/v2</a>
+</p>
+<a name="index"></a>
+<h2>Index of Resources and Operations</h2>
+<ol>
+<li xmlns="http://www.w3.org/1999/xhtml">
+<a href="#N65569">User</a>
+<ol>
+<li>
+<a href="#N65583">Create a new user account</a>
+</li>
+<li>
+<a href="#N65643">Get user details</a>
+</li>
+</ol>
+</li>
+</ol>
+<a xmlns="" name="N65569"></a>
+<h2 class="resource">1. User</h2>
+<h4>Description</h4>
+<p>This resource represents a user. </p>
+<h4>Resource URI</h4>
+<pre>http://myapipath/v2/user/<span class="uripart">{user-id}</span>
+</pre>
+<dl>
+<dt class="uripart">user-id</dt>
+<dd>user ID</dd>
+</dl>
+<a name="N65583"></a>
+<h3 class="operation">1.1 Create a new user account</h3>
+<h4>Description</h4>Creates a new user account, if user registration is enabled.<h4>URI</h4>
+<pre>http://myapipath/v2/users</pre>
+<h4>URI Parameters</h4>n/a<h4>HTTP Method</h4>
+<span class="method">POST</span>
+<h4>Resource Formats</h4>
+<ul>
+<li>application/json</li>
+</ul>
+<h4>Authentication</h4>not required<h4>Request Entities</h4>
+						
+							
+<pre class="brush: js">
+{
+	 "email" : "john@doe.net",
+	 "username" : "John Doe"
+}</pre>
+												
+					
+<h4>Responses</h4>
+<dl>
+<dt class="statuscode">201 Created</dt>
+<dd>User account has been created. The location header contains its URI.</dd>
+<dt class="statuscode">400 Bad Request</dt>
+<dd>The provided data are incomplete or invalid.</dd>
+<dt class="statuscode">403 Forbidden</dt>
+<dd>The service instance does not allow the creation of new user accounts.</dd>
+<dt class="statuscode">409 Conflict</dt>
+<dd>The user account has not been created, because there already exists an account with matching parameters.</dd>
+</dl>
+<h4>Response Entities</h4>n/a<a name="N65643"></a>
+<h3 class="operation">1.2 Get user details</h3>
+<h4>Description</h4>Returns information about a registered user.<h4>URI</h4>
+<pre>http://myapipath/v2/user/{user-id}</pre>
+<h4>URI Parameters</h4>n/a<h4>HTTP Method</h4>
+<span class="method">GET</span>
+<h4>Resource Formats</h4>
+<ul>
+<li>application/json</li>
+</ul>
+<h4>Authentication</h4>required<h4>Request Entities</h4>n/a<h4>Responses</h4>
+<dl>
+<dt class="statuscode">200 OK</dt>
+<dd>The data set is returned as the response entity.</dd>
+<dt class="statuscode">404 Not Found</dt>
+<dd>There is no user with this user ID.</dd>
+</dl>
+<h4>Response Entities</h4>
+						
+							
+<pre class="brush: js">
+{
+	 "username" : "John Doe"
+}</pre>
+							The data returned when queried by another user.
+						
+						
+							<pre class="brush: js">
+{
+	 "email" : "john@doe.net",
+	 "username" : "John Doe"
+}</pre>
+							The data returned when queried by the user himself.
+						
+					</body>
+</html>

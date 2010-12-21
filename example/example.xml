@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<api xmlns="http://www.ioexception.de/rest-api-doc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.ioexception.de/rest-api-doc ../xsd/rest-api-doc.xsd ">
+	<name>Foo Bar Example API</name>
+	<version>v2</version>
+	<author>John Doe</author>
+	<description>The following document describe the RESTful API of the
+		example service foo bar. </description>
+	<baseuri>http://myapipath/v2</baseuri>
+	<authentication>
+		<type>Basic Authentication</type>
+		<type>OAuth</type>
+	</authentication>
+	<resources>	
+					
+		<resource>
+			<name>User</name>
+			<description>This resource represents a user. </description>
+			<path>/user/<param description="user ID">user-id</param></path>
+			<operation>
+				<name>Create a new user account</name>
+				<description>Creates a new user account, if user registration is enabled.</description>
+				<path omitResourcePath="true">/users</path>
+				<formats><format>application/json</format></formats>
+				<request>
+					<method>POST</method>
+					<authentication  mandatory="false" />
+					<entities>
+						<entity>
+							<code language="js">
+<![CDATA[{
+	 "email" : "john@doe.net",
+	 "username" : "John Doe"
+}]]></code>
+						</entity>						
+					</entities>
+				</request>
+				<response>
+					<responses>
+						<answer code="201">User account has been created. The location header contains its URI.</answer>
+						<answer code="400">The provided data are incomplete or invalid.</answer>
+						<answer code="403">The service instance does not allow the creation of new user accounts.</answer>
+						<answer code="409">The user account has not been created, because there already exists an account with matching parameters.</answer>
+					</responses>
+					<entities />										
+				</response>
+			</operation>	
+			<operation>
+				<name>Get user details</name>
+				<description>Returns information about a registered user.</description>				
+				<formats><format>application/json</format></formats>
+				<request>
+					<method>GET</method>
+					<authentication mandatory="true" />
+					<entities />
+				</request>
+				<response>
+					<responses>
+						<answer code="200">The data set is returned as the response entity.</answer>
+						<answer code="404">There is no user with this user ID.</answer>
+					</responses>
+					<entities >
+						<entity>
+							<code language="js">
+<![CDATA[{
+	 "username" : "John Doe"
+}]]></code>
+							<description>The data returned when queried by another user.</description>
+						</entity>
+						<entity>
+							<code language="js">
+<![CDATA[{
+	 "email" : "john@doe.net",
+	 "username" : "John Doe"
+}]]></code>
+							<description>The data returned when queried by the user himself.</description>
+						</entity>
+					</entities>					
+				</response>
+			</operation>					
+		</resource>
+	</resources>
+</api>

@@ -184,6 +184,7 @@
 		<xsl:if test="count(api:entities/api:entity) > 0">
 		&cr;<xsl:text>Entities:</xsl:text>&cr;
 			<xsl:for-each select="api:entities/api:entity">
+				<xsl:apply-templates select="api:description" />&cr;
 				<xsl:text>Format: </xsl:text><xsl:value-of select="api:code/@language" />&cr;
 				<xsl:text>+----------------------------------------------------------------+</xsl:text>
 				<xsl:value-of select="api:code" />&cr;
@@ -204,12 +205,13 @@
 			<xsl:call-template name="statuscode">
 				<xsl:with-param name="code"><xsl:value-of select="@code" /></xsl:with-param>
 			</xsl:call-template>			
-			<xsl:value-of select="." />
+			<xsl:value-of select="." />&cr;
 		</xsl:for-each>&cr;
 
 		<xsl:if test="count(api:entities/api:entity) > 0">
 		<xsl:text>Entities:&cr;</xsl:text>
 			<xsl:for-each select="api:entities/api:entity">
+				<xsl:apply-templates select="api:description" />&cr;
 				<xsl:apply-templates select="api:code" />&cr;
 			</xsl:for-each>
 		</xsl:if>
@@ -277,6 +279,10 @@
 	</xsl:template>
 	
 	<xsl:template match="api:tt">
+		<xsl:apply-templates />
+	</xsl:template>
+	
+	<xsl:template match="api:description">
 		<xsl:apply-templates />
 	</xsl:template>
 
