@@ -5,7 +5,8 @@ rest-doc-template
 
 Introduction
 ------------
-This tool tries to facilitate the creation of high-class and comprehensive documentations for RESTful APIs. Therefore it provides a simple XML schema for describing the API, its resources and operations. Different 
+This tool facilitates the creation of high-quality and comprehensive documentations of RESTful APIs for humans. Therefore it provides a simple XML schema for describing the API, its resources and operations. 
+The documentation can be rendered into various formats, like plain text, XHTML and PDF (using LaTeX). 
 
 
 Usage
@@ -26,27 +27,32 @@ If successful, the PDF file can be found in output/foo/bla.pdf
 You can also set the $api variable in the build-file and omit the parameter.
 
 
-Stylesheets
------------
+Available Stylesheets
+------------
 - XHTML (wip)
 - text/plain (wip)
-- LaTeX (planned)
+- LaTeX (wip)
 
+
+Examples
+-----------
+Please have a look at `example/example.xml` and the corresponding output files at `output/example/`. 
 
 FAQ
 ---
 
 > Why XML?
 
-Because it's nice for this purposes. The schema definition allows guided documentation through auto-completition and XSL is a good start for transformations into other formats. 
+Because it's nice for this purposes. The schema definition allows guided documentation through auto-completion and XSL is a good start for transformations into other formats. 
 
 
 > Why not WADL?
 
-Might also be an option for you. My effort is confined to stuff I normally document when designing RESTful APIs focussing on human readers instead. My documentation format will most probably not be an appropriate source for any kind of stub generation.
+Although both formats have some descriptions in common, WADL tends to be a machine-readable description that helps generating code.
+My template instead facilitates the creation of APIs for human readers and will thus not be an appropriate source for any kind of stub generation.
 
 
-> But a truly RESTful API does not need a documentation except mentioning the initial endpoint URI! So why?
+> But a truly RESTful API does not need a documentation except mentioning the initial end-point URI! So why?
 
 Even if your API is so RESTfully, that you are confident of needing no external documentation, it is still nice to have one for yourself, right?
 Furthermore, most client-side developers will still be happy to grab a copy anyway.
