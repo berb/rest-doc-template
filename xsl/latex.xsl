@@ -107,7 +107,7 @@ numbers=left,
 columns=flexible,
 showspaces=false,
 showstringspaces=false,
-moredelim=[is][\textbf]{|}{|}
+%moredelim=[is][\textbf]{|}{|}
 }}
 
 \title{<xsl:apply-templates select="api:name" />}

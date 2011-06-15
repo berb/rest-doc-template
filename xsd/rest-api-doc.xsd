@@ -35,7 +35,7 @@
 	<xsd:complexType name="resourceType">
 		<xsd:sequence>
 			<xsd:element name="name" type="xsd:string" />
-			<xsd:element name="description" type="xsd:string" />
+			<xsd:element name="description" type="descriptionType" />
 			<xsd:element name="path" type="uriPartType" minOccurs="0" />
 			<xsd:sequence>
 				<xsd:element name="operation" type="operationType"
@@ -192,6 +192,10 @@
 			<xsd:enumeration value="text/xml" />
 			<xsd:enumeration value="text/plain" />
 			<xsd:enumeration value="n/a" />
+			<xsd:enumeration value="application/atom+xml" />
+			<xsd:enumeration value="application/vnd.google-earth.kml+xml" />
+			<xsd:enumeration value="varying" />
+			
 		</xsd:restriction>
 	</xsd:simpleType>
 

@@ -73,15 +73,167 @@ dl { padding: 0.5em; } dt { background:#fff; float: left; clear: left; padding-l
 	font: bold 100% monospace; 
 }
 
+#watermark {
+        position:fixed; 
+        left:0px; 
+        top:0px;
+        width:32px;
+        height:100%;
+        background-color:#EEE;
+        padding:0px;
+        margin:0px;
+} 
+
+
+
+#watermark-text {
+	color:#999;
+	border:0px solid red;
+	writing-mode:tb-rl;
+	-webkit-transform:rotate(90deg);
+	-moz-transform:rotate(90deg);
+	-o-transform: rotate(90deg);
+	white-space:nowrap;
+	display:block;
+	bottom:0px;
+	width:20px;
+	height:20px;
+	font-family: Helvetica, sans-serif;
+	letter-spacing: 5px;
+	font-size:24px;
+	font-weight:normal;
+	text-shadow: 0px 0px 1px #999;
+	padding:0 10px 10px 5px;
+}
+
+#watermark-text span{
+	padding-left: 30px;
+}
+
+#sidemenu {
+z-index:300;  display:none;margin: 0;  text-align:left;
+}
+
+#sidemenu  li{
+	font-size: 0.8em;
+}
+#sidemenu  li a{
+	color: #333;
+	font-weight:bold;
+}
+
+#sidemenuopener{
+z-index:300; color: #333; background-color: #EEEEEE; border:1px solid #DDD; margin: 0;  position: fixed; top: 16px;  left: auto;  width: 56px;  right: 0px; text-align:center;
+min-height:32px;
+}
+
+#sidemenuopener a{
+	color: #333;
+	font-weight:bold;
+}
+
+a{
+	text-decoration: none;
+}
+
+#sidemenuopenerbox{
+	position: fixed; right:12px;
+}
+
+.shadow {
+	-moz-box-shadow: 2px 2px 3px #333;
+	-webkit-box-shadow: 2px 2px 3px #333;
+	box-shadow: 2px 2px 3px #333;
+	/* For IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#333333')";
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#333333');
+	
+}
+
+
 			</style>
 
-<script type="text/javascript">
-		SyntaxHighlighter.all();
-</script>
+			<script type="text/javascript">
+					SyntaxHighlighter.all();
+			</script>
+			
+			<script type="text/javascript">
+			function showElement(layer,sx,t1,t2){
+			var l = document.getElementById(layer);
+			var s = document.getElementById(sx);
+			if(l.style.display=="none"){
+			l.style.display="block";
+			l.backgroundPosition="top";
+			s.innerHTML= t2;
+			} else {
+			l.style.display="none";
+			s.innerHTML= t1;
+			}
+			}
+			
+			function boxSize(x,a,b){
+				var el = document.getElementById(x);
+				if(el.style.width === a){
+					el.style.width = b;
+				}
+				else{
+					el.style.width = a;
+				}
+			}
+			
+			</script>
 
 				<title><xsl:value-of select="api:name" /> - RESTful API Documentation</title>				
 			</head>
 			<body>
+				<div id="watermark">				
+					<div id="watermark-text"><span><xsl:apply-templates select="api:name" /></span><span><xsl:apply-templates select="api:version" /></span></div>
+				</div>
+				
+
+<div id="sidemenuopener" class="shadow">
+<div id="sidemenuopenerbox">
+	<a href="#" class="button" id="menuopener" onclick="javascript:showElement('sidemenu','menuopener','TOC','X'); boxSize('sidemenuopener','25%','56px'); return false;">TOC</a>
+</div>
+	<ol id="sidemenu" style="display:none;">
+				<xsl:for-each select="api:resources/api:resource">
+					<xsl:sort select="api:name"/>
+
+					<xsl:variable name="resourcenr"><xsl:value-of select="position()"/></xsl:variable>
+										
+					<xsl:element name="li">
+					<xsl:element name="a">
+						<xsl:attribute name="id">l<xsl:value-of select="generate-id(.)" /></xsl:attribute>
+						<xsl:attribute name="href">#</xsl:attribute>
+						<xsl:attribute name="onclick">javascript:showElement('X<xsl:value-of select="generate-id(.)" />','l<xsl:value-of select="generate-id(.)" />','[+]','[-]'); return false;</xsl:attribute>
+						[+]
+					</xsl:element>
+					<xsl:text> </xsl:text>
+					
+					<xsl:element name="a">
+						<xsl:attribute name="href">#<xsl:value-of select="generate-id(.)" /></xsl:attribute>
+						 <xsl:apply-templates select="api:name" />
+					</xsl:element>
+
+					<xsl:element name="ol">
+						<xsl:attribute name="id">X<xsl:value-of select="generate-id(.)" /></xsl:attribute>
+						<xsl:attribute name="style">display:none;</xsl:attribute>
+						<xsl:for-each select="api:operation">
+						<xsl:sort select="api:name"/>
+							<xsl:element name="li">
+							<xsl:element name="a">
+								<xsl:attribute name="href">#<xsl:value-of select="generate-id(.)" /></xsl:attribute>
+								 <xsl:value-of select="api:name" />
+							</xsl:element>
+							</xsl:element>
+						</xsl:for-each>		
+					</xsl:element>
+					</xsl:element>
+				</xsl:for-each>				
+	</ol>
+</div>
+				
 				<h1><xsl:apply-templates select="api:name" /></h1>
 				<a name="introduction" />
 				<h2>Introduction</h2>
@@ -333,7 +485,19 @@ dl { padding: 0.5em; } dt { background:#fff; float: left; clear: left; padding-l
 		</dl>
 	</xsl:template>	
 
-
+	
+	<xsl:template match="api:it">
+		<em><xsl:apply-templates /></em>
+	</xsl:template>	
+			
+	<xsl:template match="api:b">
+		<strong><xsl:apply-templates /></strong>
+	</xsl:template>	
+			
+	<xsl:template match="api:tt">
+		<span style="font-family:monospace;"><xsl:apply-templates /></span>
+	</xsl:template>	
+			
 
 	<xsl:template name="statuscode">
 		<xsl:param name="code" />
