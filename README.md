@@ -29,9 +29,9 @@ You can also set the $api variable in the build-file and omit the parameter.
 
 Available Stylesheets
 ------------
-- XHTML (wip)
-- text/plain (wip)
-- LaTeX (wip)
+- XHTML (work in progress)
+- text/plain (in progress)
+- LaTeX (in progress)
 
 
 Examples
@@ -43,7 +43,7 @@ FAQ
 
 > Why XML?
 
-Because it's nice for this purposes. The schema definition allows guided documentation through auto-completion and XSL is a good start for transformations into other formats. 
+Because it's nice for these purposes. The schema definition allows guided documentation through auto-completion and XSL is a good start for transformations into other formats. 
 
 
 > Why not WADL?
