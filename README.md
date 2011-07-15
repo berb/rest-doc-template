@@ -54,7 +54,7 @@ My template instead facilitates the creation of APIs for human readers and will 
 
 > But a truly RESTful API does not need a documentation except mentioning the initial end-point URI! So why?
 
-Even if your API is so RESTfully, that you are confident of needing no external documentation, it is still nice to have one for yourself, right?
+Even if your API is so RESTful that you are confident of needing no external documentation, it is still nice to have one for yourself, right?
 Furthermore, most client-side developers will still be happy to grab a copy anyway.
 
 

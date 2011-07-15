@@ -56,13 +56,141 @@ dl { padding: 0.5em; } dt { background:#fff; float: left; clear: left; padding-l
 	font: bold 100% monospace; 
 }
 
+#watermark {
+        position:fixed; 
+        left:0px; 
+        top:0px;
+        width:32px;
+        height:100%;
+        background-color:#EEE;
+        padding:0px;
+        margin:0px;
+} 
+
+
+
+#watermark-text {
+	color:#999;
+	border:0px solid red;
+	writing-mode:tb-rl;
+	-webkit-transform:rotate(90deg);
+	-moz-transform:rotate(90deg);
+	-o-transform: rotate(90deg);
+	white-space:nowrap;
+	display:block;
+	bottom:0px;
+	width:20px;
+	height:20px;
+	font-family: Helvetica, sans-serif;
+	letter-spacing: 5px;
+	font-size:24px;
+	font-weight:normal;
+	text-shadow: 0px 0px 1px #999;
+	padding:0 10px 10px 5px;
+}
+
+#watermark-text span{
+	padding-left: 30px;
+}
+
+#sidemenu {
+z-index:300;  display:none;margin: 0;  text-align:left;
+}
+
+#sidemenu  li{
+	font-size: 0.8em;
+}
+#sidemenu  li a{
+	color: #333;
+	font-weight:bold;
+}
+
+#sidemenuopener{
+z-index:300; color: #333; background-color: #EEEEEE; border:1px solid #DDD; margin: 0;  position: fixed; top: 16px;  left: auto;  width: 56px;  right: 0px; text-align:center;
+min-height:32px;
+}
+
+#sidemenuopener a{
+	color: #333;
+	font-weight:bold;
+}
+
+a{
+	text-decoration: none;
+}
+
+#sidemenuopenerbox{
+	position: fixed; right:12px;
+}
+
+.shadow {
+	-moz-box-shadow: 2px 2px 3px #333;
+	-webkit-box-shadow: 2px 2px 3px #333;
+	box-shadow: 2px 2px 3px #333;
+	/* For IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#333333')";
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#333333');
+	
+}
+
+
 			</style>
 <script type="text/javascript">
-		SyntaxHighlighter.all();
-</script>
+					SyntaxHighlighter.all();
+			</script><script type="text/javascript">
+			function showElement(layer,sx,t1,t2){
+			var l = document.getElementById(layer);
+			var s = document.getElementById(sx);
+			if(l.style.display=="none"){
+			l.style.display="block";
+			l.backgroundPosition="top";
+			s.innerHTML= t2;
+			} else {
+			l.style.display="none";
+			s.innerHTML= t1;
+			}
+			}
+			
+			function boxSize(x,a,b){
+				var el = document.getElementById(x);
+				if(el.style.width === a){
+					el.style.width = b;
+				}
+				else{
+					el.style.width = a;
+				}
+			}
+			
+			</script>
 <title>Foo Bar Example API - RESTful API Documentation</title>
 </head>
 <body>
+<div id="watermark">
+<div id="watermark-text">
+<span>Foo Bar Example API</span><span>v2</span>
+</div>
+</div>
+<div id="sidemenuopener" class="shadow">
+<div id="sidemenuopenerbox">
+<a href="#" class="button" id="menuopener" onclick="javascript:showElement('sidemenu','menuopener','TOC','X'); boxSize('sidemenuopener','25%','56px'); return false;">TOC</a>
+</div>
+<ol id="sidemenu" style="display:none;">
+<li>
+<a id="lN65569" href="#" onclick="javascript:showElement('XN65569','lN65569','[+]','[-]'); return false;">
+						[+]
+					</a> <a href="#N65569">User</a>
+<ol id="XN65569" style="display:none;">
+<li>
+<a href="#N65583">Create a new user account</a>
+</li>
+<li>
+<a href="#N65643">Get user details</a>
+</li>
+</ol>
+</li>
+</ol>
+</div>
 <h1>Foo Bar Example API</h1>
 <a name="introduction"></a>
 <h2>Introduction</h2>
@@ -144,8 +272,14 @@ dl { padding: 0.5em; } dt { background:#fff; float: left; clear: left; padding-l
 <h4>Response Entities</h4>n/a<a name="N65643"></a>
 <h3 class="operation">1.2 Get user details</h3>
 <h4>Description</h4>Returns information about a registered user.<h4>URI</h4>
-<pre>http://myapipath/v2/user/{user-id}</pre>
-<h4>URI Parameters</h4>n/a<h4>HTTP Method</h4>
+<pre>http://myapipath/v2/user/<span class="uripart">{user-id}</span>
+</pre>
+<h4>URI Parameters</h4>
+<dl>
+<dt class="uripart">user-id</dt>
+<dd>user ID</dd>
+</dl>
+<h4>HTTP Method</h4>
 <span class="method">GET</span>
 <h4>Resource Formats</h4>
 <ul>

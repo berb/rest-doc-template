@@ -327,21 +327,20 @@ a{
 		<xsl:apply-templates select="api:description" />
 		
 		<h4>URI</h4>
-							 <xsl:variable name="resoureUri">
-			           <xsl:value-of select="$baseURI" />
-			           <xsl:for-each select="./../api:path/node()">
-	   			       <xsl:choose>
-							<xsl:when test="@description">
-								<xsl:text>{</xsl:text><xsl:value-of select="." /><xsl:text>}</xsl:text>
-							</xsl:when>
-							<xsl:otherwise><xsl:value-of select="." /></xsl:otherwise>
-						</xsl:choose>
-   			        </xsl:for-each>
-			        </xsl:variable>
 			<pre>			
 				<xsl:choose>
 					<xsl:when test="api:path[@omitResourcePath = 'true']"><xsl:value-of select="$baseURI" /></xsl:when>
-			       <xsl:otherwise><xsl:value-of select="$resoureUri" /></xsl:otherwise>
+			       <xsl:otherwise>
+			       	<xsl:value-of select="$baseURI" />
+			           <xsl:for-each select="./../api:path/node()">
+	   			       <xsl:choose>
+							<xsl:when test="@description">
+									<span class="uripart">{<xsl:value-of select="." />}</span>
+							</xsl:when>
+							<xsl:otherwise><xsl:value-of select="." /></xsl:otherwise>
+						</xsl:choose>
+   			        </xsl:for-each>			       
+			       </xsl:otherwise>
 		        </xsl:choose>					
 								
 			           <xsl:for-each select="api:path/node()">
@@ -355,20 +354,54 @@ a{
 
 		
 		<h4>URI Parameters</h4>
-			<xsl:choose>
-				<xsl:when test="count(api:path/api:param) > 0">
+
+ 			        
+ 			        
+		<xsl:choose>
+			<xsl:when test="api:path[@omitResourcePath = 'true']">
+				<xsl:choose>
+					<xsl:when test="count(api:path/api:param) > 0">
+   				        <dl>
+	      					 <xsl:for-each select="api:path/node()">
+								<xsl:if test="@description">
+									<dt class="uripart">{<xsl:value-of select="." />}</dt>
+									<dd><xsl:value-of select="@description" /></dd>									
+								</xsl:if>
+  			        		</xsl:for-each>
+   			    	    </dl>
+   			        </xsl:when>
+   			        <xsl:otherwise>n/a</xsl:otherwise>
+	        	</xsl:choose>
+			</xsl:when>
+	       <xsl:otherwise>
+ 	   			<xsl:choose>
+	 				<xsl:when test="count(./../api:path/api:param)+count(api:path/api:param) > 0">
+		          		<dl>
+		   			        <xsl:for-each select="./../api:path/node()">
+								<xsl:if test="@description">
+									<dt class="uripart"><xsl:value-of select="." /></dt>
+									<dd><xsl:value-of select="@description" /></dd>									
+								</xsl:if>
+   					        </xsl:for-each>		          		
+	      					 <xsl:for-each select="api:path/node()">
+								<xsl:if test="@description">
+									<dt class="uripart">{<xsl:value-of select="." />}</dt>
+									<dd><xsl:value-of select="@description" /></dd>									
+								</xsl:if>
+  			        		</xsl:for-each>
+		        	 </dl>
+		        	</xsl:when>
+	        	<xsl:otherwise>n/a</xsl:otherwise>
+	       	</xsl:choose>
+       </xsl:otherwise>
+      </xsl:choose>	   			        
+
+		
 			  			        
-   			        <dl>
-   			        <xsl:for-each select="api:path/node()">
-							<xsl:if test="@description">
-								<dt class="uripart">{<xsl:value-of select="." />}</dt>
-								<dd><xsl:value-of select="@description" /></dd>									
-							</xsl:if>
-   			        </xsl:for-each>
-   			        </dl>
-		       </xsl:when>
-		       <xsl:otherwise>n/a</xsl:otherwise>
-	        </xsl:choose>		
+   			       
+   			       
+
+		
 		<h4>HTTP Method</h4>
 		<xsl:apply-templates select="api:request/api:method" />
 		
