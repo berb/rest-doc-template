@@ -8,6 +8,17 @@ Introduction
 This tool facilitates the creation of high-quality and comprehensive documentations of RESTful APIs for humans. Therefore it provides a simple XML schema for describing the API, its resources and operations. 
 The documentation can be rendered into various formats, like plain text, XHTML and PDF (using LaTeX). 
 
+Requirements
+------------
+### Required
+
+- Apache Ant
+
+### Optional
+To generate pdf output pdftex is required, using ubuntu this requires the following packages:
+
+- texlive-latex-base
+- texlive-latex-extra
 
 Usage
 -----------
