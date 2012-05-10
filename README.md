@@ -19,6 +19,7 @@ To generate pdf output pdftex is required, using ubuntu this requires the follow
 
 - texlive-latex-base
 - texlive-latex-extra
+- texlive-fonts-recommended
 
 Usage
 -----------
