@@ -12,14 +12,19 @@ Requirements
 ------------
 ### Required
 
-- Apache Ant
+- Apache Ant (Available for all common OSs)
+- Java JDK 
 
 ### Optional
-To generate pdf output pdftex is required, using ubuntu this requires the following packages:
+To generate pdf output pdftex is required, some additional fonts and formatting packages are also required.
+
+Using Ubuntu / Debian this requires the following packages to be installed:
 
 - texlive-latex-base
 - texlive-latex-extra
 - texlive-fonts-recommended
+
+On Windows the quickest way to get LaTeX working is using the MikTeX distribution from http://miktex.org/
 
 Usage
 -----------
