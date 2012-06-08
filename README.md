@@ -8,6 +8,23 @@ Introduction
 This tool facilitates the creation of high-quality and comprehensive documentations of RESTful APIs for humans. Therefore it provides a simple XML schema for describing the API, its resources and operations. 
 The documentation can be rendered into various formats, like plain text, XHTML and PDF (using LaTeX). 
 
+Requirements
+------------
+### Required
+
+- Apache Ant (Available for all common OSs)
+- Java JDK 
+
+### Optional
+To generate pdf output pdftex is required, some additional fonts and formatting packages are also required.
+
+Using Ubuntu / Debian this requires the following packages to be installed:
+
+- texlive-latex-base
+- texlive-latex-extra
+- texlive-fonts-recommended
+
+On Windows the quickest way to get LaTeX working is using the MikTeX distribution from http://miktex.org/
 
 Usage
 -----------
