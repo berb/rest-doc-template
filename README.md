@@ -1,11 +1,11 @@
 rest-doc-template
 =================
 
-> A template for creating human readable RESTful API documentations.
+> A template for creating human readable HTTP API documentations.
 
 Introduction
 ------------
-This tool facilitates the creation of high-quality and comprehensive documentations of RESTful APIs for humans. Therefore it provides a simple XML schema for describing the API, its resources and operations. 
+This tool facilitates the creation of high-quality and comprehensive documentations of HTTP APIs for humans. Therefore it provides a simple XML schema for describing the API, its resources and operations. 
 The documentation can be rendered into various formats, like plain text, XHTML and PDF (using LaTeX). 
 
 Requirements
@@ -71,7 +71,7 @@ My template instead facilitates the creation of APIs for human readers and will 
 
 > But a truly RESTful API does not need a documentation except mentioning the initial end-point URI! So why?
 
-Even if your API is so RESTful that you are confident of needing no external documentation, it is still nice to have one for yourself, right?
+Even if your API is so RESTful that you are confident of not needing an external documentation, it is still nice to have one for yourself internally, right?
 Furthermore, most client-side developers will still be happy to grab a copy anyway.
 
 
